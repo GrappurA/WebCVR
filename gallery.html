@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img\happy.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Runa's Gallery</title>
+</head>
+
+<body>
+    <div id="main-container" class="bg-[#E8AE68] w-[80%] mx-auto min-h-screen">
+
+        <nav id="menu" class="-mt-[1px] bg-[#3c230a] border-2 border-[#6b4226] rounded-xl mt-0 mx-auto w-[100%]">
+            <ul class="flex justify-center space-x-8 p-3 text-[#EDE6DB] font-semibold">
+
+                <div class="flex justify-center items-center size-16"><a href="index.html"><img id="logo"
+                            class="transition-transform duration-500 ease-in-out hover:rotate-360 hover:scale-140 w-[250px] -ml-20 h-auto rounded-full border-3 border-[#DB5A42]"
+                            src="img/runa_logo.png" alt="logo"></a>
+                </div>
+
+                <ul class="flex mr-8 text-xl space-x-10 mt-4">
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="index.html"
+                            class="hover:text-teal-400 transition mt-[10%]">Домашня</a></li>
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="gallery.html"
+                            class="hover:text-teal-400 transition">Галерея</a></li>
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="about.html"
+                            class="hover:text-teal-400 transition">Про Автора</a></li>
+                </ul>
+        </nav>
+        <h1 class="text-3xl mx-auto p-2 m-2 border-2 bg-[#cf6634] rounded-xl w-fit">Галерея Фотографій Руни</h1>
+        <div id="gallery"
+            class="w-[80%] rounded-xl mx-auto bg-[#de9572] grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 box-border p-2 place-items-center">
+            <img src="img/photo_10_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_11_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_2022-11-13_14-05-38.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_13_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_1_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+
+            <img src="img/photo_2_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_5_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_3_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_4_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_7_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_8_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_9_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_6_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_12_2025-10-16_16-18-04.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+            <img src="img/photo_2024-02-27_23-59-52.jpg" alt="runa's image" id="gallery-image" class="gallery-image">
+
+
+            <button id="scroll-btn" class="inline"><img src="img/top.png" alt="up-button" class="inline w-[10%] h-auto ml-[220%] rounded-full border-2 transition-transform duration-350 hover:scale-110"></button>
+            <script src="gallery.js"></script>
+        </div>
+        <script src="scrollTop.js"></script>
+    </div>
+
+</body>
+
+</html>

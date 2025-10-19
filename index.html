@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runa Tigra</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img\happy.png" type="image/x-icon">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+
+<body>
+    <div class="bg-[#E8AE68] max-w-fit h-screen mx-auto overflow-hidden" id="main-container">
+
+        <nav class="-mt-[1px] bg-[#3c230a] border-2 border-[#6b4226] rounded-xl mt-0 mx-auto w-[100%]">
+            <ul class="flex justify-center space-x-8 p-3 text-[#EDE6DB] font-semibold">
+
+                <div class="flex justify-center items-center size-16"><a href="index.html"><img id="logo"
+                            class="transition-transform duration-500 ease-in-out hover:rotate-360 hover:scale-140 w-[250px] -ml-20 h-auto rounded-full border-3 border-[#DB5A42]"
+                            src="img/runa_logo.png" alt="logo"></a>
+                </div>
+
+                <ul class="flex mr-8 text-xl space-x-10 mt-4">
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="index.html"
+                            class="hover:text-teal-400 transition mt-[10%]">Домашня</a></li>
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="gallery.html"
+                            class="hover:text-teal-400 transition">Галерея</a></li>
+                    <li class="transition-transform duration-350 hover:scale-140"><a href="about.html"
+                            class="hover:text-teal-400 transition">Про Автора</a></li>
+                </ul>
+        </nav>
+        <h1 class="text-5xl text-center font-['roboto-slab'] mb-[2px]">Вітаємо на сторінці Руни!</h1>
+
+        <p id="runa_happy_birthday" style="display: block; 
+            font-family: Impact, 'Arial Narrow Bold', sans-serif;
+            font-size: 19px; 
+            color: #249d9f;
+            margin: 0 0 0 52%;
+            max-width: 210px;
+            text-align: left;"></p>
+
+        <div class="profile-grid grid grid-cols-2 gap-8 justify-start w-full max-w-[900px] mx-auto">
+
+            <div class="left-column">
+                <p class="text margin pl-8" class="ml-[10px]" class="margin">Це Руна, привітайтесь👋 із Руною.</p>
+                <img class="w-[89%] max-w-[100%] h-auto rounded-[40px] block pr-1 ml-3" src="img/runa_homepage.jpg"
+                    alt="Runa" id="runa-homepage">
+            </div>
+
+            <div class="right-column flex items-start space-y-4 pr-3">
+
+                <table class="mt-7 text-xl border-collapse font-['roboto-slab'] w-fit ml-[-15%]" id="table">
+                    <tr>
+                        <th>Ім'я</th>
+                        <th style="font-weight: 300;">Руна</th>
+                    </tr>
+
+                    <tr>
+                        <th>Порода🐩</th>
+                        <th style="font-weight: 300;">Амстафф</th>
+                    </tr>
+
+                    <tr>
+                        <th>Вік🔞</th>
+                        <th style="font-weight: 300;" id="age">вік</th>
+                    </tr>
+                    <script>
+
+                        const birthDate = new Date(2021, 10, 1);
+                        const today = new Date();
+
+                        let age = today.getFullYear() - birthDate.getFullYear();
+
+                        const hadBirthdayThisYear =
+                            today.getMonth() > birthDate.getMonth() ||
+                            (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+                        if (!hadBirthdayThisYear) {
+                            age--;
+                        }
+
+                        if (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate()) {
+
+                            document.getElementById("runa_happy_birthday").textContent = "🔥It is Runa's birthday🔥\nHappy Birthday, Doggy! 🎉";
+                        }
+
+                        document.getElementById("age").textContent = age;
+                    </script>
+
+                    <tr>
+                        <th>Вага⚖️</th>
+                        <th style="font-weight: 300;">30 кг</th>
+                    </tr>
+
+                    <tr>
+                        <th>Іграшка🧸</th>
+                        <th style="font-weight: 300;">Пулер</th>
+                    </tr>
+                </table>
+
+                <div id="words+quotebox_container" class="flex-col mt-7 ml-2">
+
+                    <div id="wise-words"
+                        class="bg-[#312817] max-w-[250px] text-[18px] p-2 border-2 border-[#c99036] rounded-full text-center text-[#EDE6DB] mb-[5px] mt-[20%]">
+                        Мудрі слова від Руни на сьогодні!
+                    </div>
+
+                    <div id="quote_box"
+                        class="flex p-3 border-2 border-[#EDE6DB] rounded-lg bg-[#3b352a] text-[#EDE6DB] text-[15px] max-w-[230px] items-center gap-0">
+
+                        <span id="quote_text" class="break-words">Loading...</span>
+                        <button id="translate_btn"
+                            class="transition-transform duration-350 ease-in-out hover:scale-105 self-start text-xs bg-[#d7472d] hover:bg-[#DB5A42] text-[#EDE6DB] px-2 py-1 rounded inline-block">
+                            ukr
+                        </button>
+                    </div>
+                </div>
+
+                <script>
+                    let original;
+                    let translation;
+                    let quoteBox;
+
+                    async function loadQuote() {
+                        quoteBox = document.getElementById("quote_text");
+                        quoteBox.textContent = "Завантажуємо...";
+
+                        try {
+                            const response = await fetch("https://api.quotable.io/random");
+                            const data = await response.json();
+                            original = data.content;
+                            translation = await translateQuote(data.content);
+
+                            if (original.length > 150 || original.length < 25) return loadQuote();
+                            quoteBox.innerHTML = `"${original}" <i style="font-size: 18px;">©Runa</i>`;
+
+                        } catch (error) {
+                            console.warn("Quote API failed, using local list:", error);
+                            document.getElementById("translate_btn").style.display = "none";
+                            const quotes = [
+                                "Життя починається там, де закінчується страх.",
+                                "Сила не в тому, щоб ніколи не падати, а в тому, щоб підніматися після кожного падіння.",
+                                "Кожен день — це новий шанс змінити своє життя.",
+                                "Найкращий час посадити дерево був десять років тому. Наступний найкращий час — сьогодні.",
+                                "Не бійся повільного руху вперед, бійся стояння на місці.",
+                                "Тільки той, хто йде, здолає дорогу.",
+                                "Справжня свобода — це робити вибір і приймати за нього відповідальність.",
+                                "Успіх приходить до тих, хто діє, а не чекає.",
+                                "Щоб побачити веселку, треба пережити дощ.",
+                                "Ніхто не зможе зупинити того, хто вірить у себе.",
+                                "Не шукай легкого шляху — шукай правильний.",
+                                "Іноді потрібно просто зробити крок, навіть якщо не бачиш усю дорогу.",
+                                "Сонце завжди повертається, навіть після найтемнішої ночі.",
+                                "Мрії не працюють, якщо не працюєш ти.",
+                                "Твоя енергія притягує схожих до тебе людей.",
+                                "Кожна помилка — це урок, а не кінець.",
+                                "Найважче — почати діяти, усе інше залежить від наполегливості.",
+                                "Ти сильніший, ніж думаєш, і здатен на більше, ніж здається.",
+                                "Коли здається, що все проти тебе — це знак, що ти йдеш правильною дорогою.",
+                                "Живи так, щоб твої мрії стали спогадами.",
+                                "«Усі мають план, допоки не отримають удар у обличчя». — Майк Тайсон",
+                                "«Страх — це найбільша перепона до навчання. Але страх може бути твоїм найкращим другом… Якщо ти не навчишся ним керувати, він зруйнує тебе й усе навколо». — Майк Тайсон",
+                                "«Якщо мій розум може це уявити, а моє серце — повірити, тоді я можу цього досягти». — Мухаммед Алі",
+                                "«Я ненавидів кожну хвилину тренування, але сказав собі: «Не здавайся. Страждай зараз і живи решту життя чемпіоном».» — Мухаммед Алі",
+                                "«Знати себе й пізнати ворога — і ти виграєш тисячу битв». — Сунь Цзи",
+                                "«Хто знає, коли боротися, а коли не боротися — переможе». — Сунь Цзи",
+                                "«У хаосі також є можливість». — Сунь Цзи",
+                                "«Прийми все таким, яким воно є». — Міямото Мусасі",
+                                "«Є більше ніж один шлях на вершину гори». — Міямото Мусасі",
+                                "«Справжня мета бойового мистецтва — не в тому, щоб його застосовувати». — Міямото Мусасі",
+                                "«Усе має красу, але не кожен її бачить». — Конфуцій",
+                                "«Неважливо, як повільно ти йдеш, якщо ти не зупиняєшся». — Конфуцій",
+                                "«Через три методи ми можемо навчитися мудрості: по-перш, через роздум, що є найблагородніше; по-друге — через імітацію, що є найпростіше; по-третє — через досвід, що є найбільш гірким». — Конфуцій",
+                                "«Що шукає вища людина — в собі; що шукає низька — в інших». — Конфуцій",
+                                "«Коли здається, що все проти тебе — це знак, що ти йдеш правильною дорогою». (адаптована цитата)",
+                                "«Твої помилки — це не кінець, це урок». (адаптована цитата)",
+                                "«Живи так, щоб твої мрії стали спогадами». (адаптована цитата)",
+                                "«Успіх приходить до тих, хто діє, а не чекає». (адаптована цитата)",
+                                "«Найважче — це почати діяти, усе інше залежить від наполегливості»."
+                            ];
+
+                            const res = quotes[Math.floor(Math.random() * quotes.length)];
+                            quoteBox.innerHTML = `"${res}" <i style="font-size: 20px;">©Runa</i>`;
+                        }
+                    }
+
+                    loadQuote();
+
+                    async function translateQuote(text) {
+                        const encoded = encodeURIComponent(text);
+                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=uk&dt=t&q=${encoded}`;
+
+                        const res = await fetch(url);
+                        const json = await res.json();
+
+                        return json[0][0][0];
+
+                    }
+
+                    const button = document.getElementById("translate_btn")
+                    button.addEventListener("click", showTranslation);
+
+                    let showTranslation_b;
+                    function showTranslation() {
+                        showTranslation_b = !showTranslation_b;
+
+                        if (showTranslation_b) {
+                            quoteBox.innerHTML = `"${translation}" <i style="font-size: 20px;">©Runa</i>`;
+                            button.textContent = "eng";
+                        }
+                        else {
+                            quoteBox.innerHTML = `"${original}" <i style="font-size: 20px;">©Runa</i>`;
+                            button.textContent = "ukr";
+                        }
+
+                    }
+                </script>
+
+            </div>
+
+            <div id="quiz-container"
+                class="flex-col ml-[93%] mt-[-50%] text-white bg-[#3b352a] border-2 border-white roudned-full p-1 w-fit text-center h-fit">
+                <div id="questionBox" class="text-[17px] w-[300px]">Here will be questions</div>
+                <div id="optionsBox" class="text-xl grid grid-cols-2 gap-4 border-collapse border- p-2">here will be
+                    options</div>
+                <div id="quizResult" class="hidden">here will be the result</div>
+                <script src="quiz.js"></script>
+            </div>
+
+            <div id="runa-heads" class="w-fit h-fit"></div>
+
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>
