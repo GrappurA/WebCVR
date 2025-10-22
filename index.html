@@ -10,10 +10,10 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 
-<body>
-    <div class="bg-[#E8AE68] max-w-fit h-screen mx-auto overflow-hidden" id="main-container">
+<body class="overflow-hidden">
+    <div id="main-container" class="bg-[#E8AE68] w-[80%] mx-auto min-h-screen">
 
-        <nav class="-mt-[1px] bg-[#3c230a] border-2 border-[#6b4226] rounded-xl mt-0 mx-auto w-[100%]">
+        <nav id="menu" class="-mt-[1px] bg-[#3c230a] border-2 border-[#6b4226] rounded-xl mt-0 mx-auto w-[100%]">
             <ul class="flex justify-center space-x-8 p-3 text-[#EDE6DB] font-semibold">
 
                 <div class="flex justify-center items-center size-16"><a href="index.html"><img id="logo"
@@ -29,6 +29,13 @@
                     <li class="transition-transform duration-350 hover:scale-140"><a href="about.html"
                             class="hover:text-teal-400 transition">Про Автора</a></li>
                 </ul>
+
+                <div id="runa_yt" class="flex w-[5%]">
+                    <a target="_blank" href="https://www.youtube.com/@%D0%A0%D1%83%D0%BD%D0%B0%D0%A2%D1%96%D0%B3%D1%80%D0%B0">
+                        <img src="img/[CITYPNG.COM]HD White Youtube YT Logo Symbol Icon PNG - 2000x2000.png"
+                            class="w-[20%] h-auto mt-[2%] flex justify-right ml-70 px-0" alt="yt_logo">
+                    </a>
+                </div>
         </nav>
         <h1 class="text-5xl text-center font-['roboto-slab'] mb-[2px]">Вітаємо на сторінці Руни!</h1>
 
@@ -227,7 +234,7 @@
                 <script src="quiz.js"></script>
             </div>
 
-            <div id="runa-heads" class="w-fit h-fit"></div>
+            <div id="runa-heads" class="w-full h-fit overflow-hidden"></div>
 
         </div>
 

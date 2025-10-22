@@ -46,23 +46,44 @@ th {
     background-color: #3b352a;
 }
 
-@keyframes floatUp {
-    0% {
-        transform: translate(0, 0) scale(0.5) rotate(0deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(var(--x), -200px) scale(1) rotate(var(--r));
-        opacity: 0;
-    }
+#runa-heads {
+    position: fixed; /* Stays on screen even if you scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Hides heads once they leave the screen */
+    pointer-events: none; /* Prevents the heads from blocking clicks */
+    z-index: 100; /* Ensures heads appear on top of other content */
+    margin:auto;
 }
 
+/* Individual head image styling */
 .runa-head {
     position: absolute;
-    width: 70px;
-    height: 70px;
-    animation: floatUp 2.5s forwards;
+    width: 60px; /* Adjust size as needed */
+    height: auto;
+    /* The animation will be called 'floatUp', last for 4 seconds,
+       run once, and then disappear. */
+    animation: floatUp 4s linear forwards;
+}
+
+/* The actual animation definition */
+@keyframes floatUp {
+    from {
+        /* Start at the bottom, invisible, and at a random horizontal position */
+        transform: translateY(110vh) translateX(var(--x, 0)) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        /* Become visible as it floats up */
+        opacity: 1;
+    }
+    to {
+        /* End above the screen, faded out, and at its final rotation */
+        transform: translateY(-100px) translateX(var(--x, 0)) rotate(var(--r, 360deg));
+        opacity: 0;
+    }
 }
 
 .gallery-image {
@@ -72,4 +93,47 @@ th {
     border-width: 2px;
     align-items: center;
     margin-top: 10%;
+}
+.shine-effect {
+  position: relative; /* parent must be relative for absolute pseudo */
+  overflow: hidden;   /* hide the line outside the div */
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%; /* start completely off the left side */
+  width: 150%;
+  height: auto;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(20deg);
+  pointer-events: none;
+
+  /* initially invisible */
+  opacity: 0;
+}
+
+.shine-effect:hover::after {
+  opacity: 1;
+  animation: shine 1s forwards;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(20deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) rotate(20deg);
+    opacity: 0;
+  }
 }

@@ -12,7 +12,7 @@ const quizData = [
     {
         question: "Скільки Руні років?",
         options: ["1", "2", "3", "4"],
-        answer: "2"
+        answer: "3"
     },
     {
         question: "Скільки команд знає Руна?",
@@ -37,8 +37,8 @@ function loadQuestion() {
     q.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.textContent = opt;
-        btn.onclick = () => checkAnswer(opt);
-        btn.className = "rounded-[90px] border-2 border-[#5d8aa8] transition-transform duration-350 hover:scale-110 hover:bg-[#2c281f] p-2"
+        btn.onclick = () => checkAnswer(btn);
+        btn.className = "rounded-[90px] border-2 border-[#5d8aa8] transition-transform duration-350 hover:scale-110 p-2"
 
         optionsBox.appendChild(btn);
     });
@@ -46,9 +46,9 @@ function loadQuestion() {
 
 function celebrateQuiz() {
     const container = document.getElementById("runa-heads");
-    let headNumber = score * 20;
+    let headNumber = score * 30;
     if (headNumber === 0) {
-        headNumber = 50;
+        headNumber = 30;
     }
     for (let i = 0; i < headNumber; i++) {
         const img = document.createElement("img");
@@ -67,22 +67,33 @@ function celebrateQuiz() {
     }
 }
 
-function checkAnswer(option) {
-    if (option === quizData[current].answer) {
-        score++;
-    }
-    current++;
+function checkAnswer(optBtn) {
+    const buttons = optionsBox.querySelectorAll("button");
+    buttons.forEach(btn => {
+        btn.disabled = true;
+    });
 
-    if (current >= quizData.length) {
+    if (optBtn.textContent === quizData[current].answer) {
+        score++;
+        optBtn.className += " bg-[#00ff00]";
+    }
+    else {
+        optBtn.className += " bg-[#ff0000]";
+    }
+    
+    if (current >= quizData.length-1) {
         questionBox.style.fontSize = "20px";
         questionBox.textContent = `Ви вгадали ${score}/${quizData.length} !`
-
-        celebrateQuiz();
+        
         optionsBox.innerHTML = "";
-
+        celebrateQuiz();
         return;
     }
-    loadQuestion();
+    
+    current++;
+    setTimeout(() => {
+        loadQuestion();
+    }, 600);
 }
 
 loadQuestion();
