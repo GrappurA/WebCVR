@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css",
     "preview": "vite preview",
+    "build": "vite build",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
