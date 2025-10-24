@@ -83,17 +83,15 @@ function checkAnswer(optBtn) {
     
     if (current >= quizData.length-1) {
         questionBox.style.fontSize = "20px";
-        questionBox.textContent = `Ви вгадали ${score}/${quizData.length} !`
-        
+        questionBox.textContent = `Ви вгадали ${score}/${quizData.length} !`;       
         optionsBox.innerHTML = "";
+
         celebrateQuiz();
         return;
     }
     
     current++;
-    setTimeout(() => {
-        loadQuestion();
-    }, 600);
+    setTimeout(loadQuestion, 800);
 }
 
 loadQuestion();
